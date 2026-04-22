@@ -1,5 +1,5 @@
-[index-9.html](https://github.com/user-attachments/files/26965813/index-9.html)
-# Junes<!DOCTYPE html>
+[index-8.html](https://github.com/user-attachments/files/26965875/index-8.html)
+Junees <!DOCTYPE html>
 <html lang="th">
 <head>
 <meta charset="UTF-8">
@@ -12,21 +12,21 @@
 <style>
 :root{--cream:#F5F0E8;--warm:#EDE5D8;--sand:#D4C5A9;--brown:#8B6F4E;--dark:#4A3728;--terra:#C17F4A;--rust:#A85C38;--sage:#7A9170;--moss:#5C7A52;--clay:#C4875A;--blush:#C49A8A;--muted:#9A8878;--border:#DDD0BC;--surface:#FDFAF5;--text:#2E221A;--safe-top:env(safe-area-inset-top,0px);--safe-bot:env(safe-area-inset-bottom,0px);}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-html,body{height:100%;width:100%;overflow:hidden;position:fixed;}
-body{font-family:'Noto Sans Thai',sans-serif;background:var(--cream);color:var(--text);}
+html{height:100%;overflow:hidden;}body{height:100%;overflow:hidden;display:flex;flex-direction:column;}
+body{font-family:'Noto Sans Thai',sans-serif;background:var(--cream);color:var(--text);display:flex;flex-direction:column;}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 10%,rgba(193,127,74,.08) 0%,transparent 50%),radial-gradient(ellipse at 80% 90%,rgba(122,145,112,.07) 0%,transparent 50%);pointer-events:none;z-index:0;}
-.hdr{padding:calc(var(--safe-top) + 12px) 18px 10px;background:var(--surface);border-bottom:1px solid var(--border);position:fixed;top:0;left:0;right:0;z-index:10;}
+.hdr{padding:calc(var(--safe-top) + 12px) 18px 10px;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0;position:relative;z-index:10;}
 .hdr-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:2px;}
 .hdr-title{font-family:'Lora',serif;font-size:21px;font-weight:600;color:var(--dark);}
 .hdr-date{font-size:11px;color:var(--muted);background:var(--warm);padding:3px 10px;border-radius:12px;font-weight:500;}
 .hdr-sub{font-size:11px;color:var(--muted);}
-.tab-bar{display:flex;background:var(--surface);border-top:1px solid var(--border);padding-bottom:var(--safe-bot);position:fixed;bottom:0;left:0;right:0;z-index:10;}
+.tab-bar{display:flex;background:var(--surface);border-top:1px solid var(--border);padding-bottom:var(--safe-bot);flex-shrink:0;position:relative;z-index:10;width:100%;}
 .tab-item{flex:1;display:flex;flex-direction:column;align-items:center;padding:9px 4px 7px;cursor:pointer;gap:2px;}
 .tab-icon{font-size:21px;line-height:1;transition:transform .2s;}
 .tab-label{font-size:10px;color:var(--muted);font-weight:500;}
 .tab-item.active .tab-label{color:var(--terra);font-weight:600;}
 .tab-item.active .tab-icon{transform:scale(1.15);}
-.main{position:fixed;top:0;left:0;right:0;bottom:0;overflow-y:scroll;overflow-x:hidden;-webkit-overflow-scrolling:touch;z-index:1;padding-top:calc(var(--safe-top) + 68px);padding-bottom:calc(var(--safe-bot) + 60px);}
+.main{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;position:relative;z-index:1;overscroll-behavior:contain;min-height:0;}
 .view{display:none;padding:14px 14px 32px;width:100%;}
 .view.active{display:block;}
 /* CALENDAR */
@@ -364,22 +364,6 @@ function getRbyDate(dateKey) {
 function setRbyDate(dateKey, arr) {
   S.set('rd_' + dateKey, arr);
 }
-
-
-// Fix scroll padding dynamically for iOS
-function fixScrollPadding(){
-  const hdr = document.querySelector('.hdr');
-  const tab = document.querySelector('.tab-bar');
-  const main = document.querySelector('.main');
-  if(hdr && tab && main){
-    const hh = hdr.getBoundingClientRect().height;
-    const th = tab.getBoundingClientRect().height;
-    main.style.paddingTop = hh + 'px';
-    main.style.paddingBottom = th + 'px';
-  }
-}
-window.addEventListener('load', fixScrollPadding);
-window.addEventListener('resize', fixScrollPadding);
 
 // INIT
 initHdr();renderPills();renderToday();
